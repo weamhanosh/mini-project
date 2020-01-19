@@ -11,7 +11,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
 import './index.css';
-import App from './components/App/index';
+import App from './components/App/index.js';
 
 //create saga middleware
 const sagaMiddleware = createSagaMiddleware();

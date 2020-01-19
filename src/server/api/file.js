@@ -1,5 +1,5 @@
 let axios = require('axios');
-let GalleryModel = require('../model/gallery');
+let GalleryModel = require('../model/file');
 
 async function getImages(tag) {
   const getImagesUrl = `services/rest/?method=flickr.photos.search&api_key=522c1f9009ca3609bcbaf08545f067ad&tags=${tag}&tag_mode=any&per_page=100&format=json&safe_search=1&nojsoncallback=1`;
@@ -12,7 +12,7 @@ async function getImages(tag) {
 }
 
 module.exports = (app) => {
-    app.post('/api/load/images', function (req, res) {
+    app.post('/api/upload', function (req, res) {
         // console.log('in load images');
         // GalleryModel
         //     .findOne({tag: req.body.tag})

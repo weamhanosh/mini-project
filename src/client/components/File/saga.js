@@ -7,11 +7,11 @@ function* uploadFile(action){
   try {
     const res = yield call(fetch, action.uri,
       {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        // body: JSON.stringify(action.payload)
+        body: JSON.stringify(action.payload)
       });
       console.log("ABC");
     const json = yield call([res, 'json']); //retrieve body of response

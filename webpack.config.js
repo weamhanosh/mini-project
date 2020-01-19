@@ -23,7 +23,7 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.(gif|png|woff|woff2|eot|ttf|svg)$/,
+        test: /\.(gif|png|woff|woff2|eot|ttf|svg|ico)$/,
         loader: 'url-loader?limit=100000'
       },
         {
@@ -49,7 +49,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: './public/TestTube.webp'
+      favicon: './public/TestTube.ico'
     })
   ]
 };

@@ -22,11 +22,11 @@ class File extends React.Component {
     render() {
         return (
             <div className="File-Upload">
-                <FileUpload name="files[]" customUpload={true}
+                <FileUpload name="files[]" url="./upload" customUpload={true}
                             uploadHandler={this.props.uploadEventHandler}
                             multiple={false} accept=".txt" maxFileSize={1000000}
                             chooseLabel={"בחר קבצים"} uploadLabel={"העלה"} cancelLabel={"ביטול"}/>
-                <Growl ref={el => this.growl = el}/>
+                {/* <Growl ref={el => this.growl = el}/> */}
             </div>
         );
     }
