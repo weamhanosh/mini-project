@@ -8,7 +8,7 @@ const path = require('path');
 
 
 const config = {
-  mongoURL: process.env.MONGO_URL || 'mongodb://localhost:27017/files',
+  mongoURL: process.env.MONGO_URL || 'mongodb://localhost:27017/texts',
   port: 8000
 };
 
@@ -29,8 +29,8 @@ if (process.env.NODE_ENV !== 'test') {
 const app = express();
 
 //body parser for json. must be done before API routes
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false})); //handle body requests
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({extended:true, limit: '10mb'})); //handle body requests
 console.log(__dirname);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,5 +42,5 @@ fs.readdirSync(__dirname + '/api').forEach((file) => {
 });
 
 
-app.listen(config.port || 8000,
-    () => console.log(`Listening on port ${process.env.PORT || 8000}!`));
+app.listen(8000,
+    () => console.log(`Listening on port 8000!`));

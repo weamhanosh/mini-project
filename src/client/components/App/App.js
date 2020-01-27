@@ -1,20 +1,16 @@
 import React from 'react';
 import logo from '../../../../public/TestTube.ico';
 import './App.css';
-import File from "../File/index";
+// import File from "../File/index";
 // import {Button} from "primereact/button";
 // import {FileUpload} from "primereact/fileupload";
 // import {Growl} from "primereact/growl";
 import {ScrollPanel} from "primereact/scrollpanel";
 import MyCheckbox from "../Checkbox";
-// import {Button} from "primereact/button";
+import MyEditor from "../MyEditor";
+import {Button} from "primereact/button";
 
-class App extends React.Component {
-
-    // constructor(props) {
-    //     super(props);
-    //     this.onClickResetOptionsEventHandler = this.onClickResetOptionsEventHandler.bind(this);
-    // }
+class App extends React.Component {   
 
     render() {
         return (
@@ -26,13 +22,10 @@ class App extends React.Component {
                         <img src={logo} className="App-logo" alt="logo"/>
                     </a>
                 </div>
-                <File/>
-                <MyCheckbox/>
-                {/*<Button*/}
-                {/*    icon="pi pi-replay"*/}
-                {/*    onClick={() => this.props.onClickResetOptionsEventHandler}*/}
-                {/*/>*/}
-                <div className="output">
+                <p></p>
+                <MyEditor/>
+                {/* <MyCheckbox/> */}
+                {/* <div className="output">
                     <ScrollPanel style={{width: '100%', height: '300px'}} className="custombar">
                         <div style={{padding: '1em', lineHeight: '1.5', width: '600px', color: "#2e81ff"}}>
                             The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
@@ -47,7 +40,7 @@ class App extends React.Component {
                             family.
                         </div>
                     </ScrollPanel>
-                </div>
+                </div> */}
             </div>
         );
     }

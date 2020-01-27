@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7eafac21-98b0-4dcf-a8cd-7cacdf868e9d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/components/App/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/App/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/components/File/File.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/File/File.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/components/File/saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/File/saga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/api/gallery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/model/gallery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +111,8 @@
       <workItem from="1579167129386" duration="9000" />
       <workItem from="1579256696503" duration="257000" />
       <workItem from="1579257072015" duration="234000" />
+      <workItem from="1579724711925" duration="6000" />
+      <workItem from="1579761298586" duration="10000" />
     </task>
     <servers />
   </component>

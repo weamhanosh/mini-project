@@ -4,7 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reducers from './reducers';
-import Sagas from './sagas';
+import sagas from './sagas';
 //import theme - change nova-light to other theme as needed
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
@@ -23,7 +23,7 @@ const store = createStore(
 );
 
 //run saga(s)
-sagaMiddleware.run(Sagas);
+sagaMiddleware.run(sagas);
 
 // Render the main component into the dom
 

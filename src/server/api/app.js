@@ -15,8 +15,8 @@ module.exports = (app) => {
             });
 
     });
-    app.post('/api/load/images', function(req, res, next) {
-        console.log('updating tag array');
+    app.post('/api/upload', function(req, res, next) {
+        console.log('/api/upload');
         AppModel
             .findOne()
             .then(doc => {
