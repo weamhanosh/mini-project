@@ -58,14 +58,6 @@ output[i] =
             return state;
         }
 
-        case MyEditorActionsConstants.SHOW_OVERLAY_ACTION:{
-            console.log('RECEIVED: MyEditorActionsConstants.SHOW_OVERLAY_ACTION');
-            console.log('ACTION:', action);
-            state = state.set('overlay', true);
-            console.log('NEW STATE=', state);
-            return state;
-        }
-
         default: //otherwise state is lost!
             return state;
     }

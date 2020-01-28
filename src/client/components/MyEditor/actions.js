@@ -22,17 +22,10 @@ function doneAction(output){
   }
 }
 
-function showOverlay(){
-  return {
-    type: MyEditorActionsConstants.SHOW_OVERLAY_ACTION,
-  }
-}
-
 let MyEditorActions = {
   editTextField,
   uploadAction,
   doneAction,
-  showOverlay
 };
 
 export default MyEditorActions;

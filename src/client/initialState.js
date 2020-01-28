@@ -14,7 +14,6 @@ export default {
             analysed_text_arr: []
         },
         output: "",
-        overlay: false
     })
     // app: Map({
     //   size: 200,
