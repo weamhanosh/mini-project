@@ -37,7 +37,7 @@ module.exports = (app) => {
         .then(doc => {
           if (doc != null) {
             console.log('text found in db!');
-            res.json(doc.analysed_text_arr);
+            res.json(doc);
           } else {
             console.log('creating new entry in db!');
             let data_promise = all(content);
@@ -45,32 +45,49 @@ module.exports = (app) => {
             .then((data) =>{
               let data_array = data.split('\n');
               let arr = [];
+              let m = -1;
               for (let i = 0; i < data_array.length - 2; i++){
                 let line_i = data_array[i].split(' ');
                 if (!(line_i[0] === '') && line_i.length >= 5){
+                  if (line_i[0] === "0" && line_i !== ""){
+                    m++;
+                  }
                   arr[i] = {
                     index: line_i[0],
                     word_in_text: line_i[1],
                     root: line_i[2],
                     word_without_starts: line_i[3],
-                    analysis: line_i.slice(4, line_i.length - 2)
+                    line_index: m,
+                    analysis: line_i.slice(4, line_i.length - 2).filter(a => a !== "unspecified")
                   }
                 } else if (line_i.length >= 6){
+                  if (line_i[1] === "0"){
+                    m++;
+                  }
                   arr[i] = {
                     index: line_i[1],
                     word_in_text: line_i[2],
                     root: line_i[3],
                     word_without_starts: line_i[4],
-                    analysis: line_i.slice(5, line_i.length - 2)
+                    line_index: m,
+                    analysis: line_i.slice(5, line_i.length - 2).filter(a => a !== "unspecified")
                   }
                 }
               }
+              let line_length_arr = [];
+              let text_array = content.split('\n');
+              for(let i = 0; i < text_array.length; i++){
+                line_length_arr[i] = {
+                  line_index: i,
+                  line_length: text_array[i].split(' ').length
+                }
+              }
               
-              let answer = new AnswerModel({text: content, analysed_text_arr: arr});
+              let answer = new AnswerModel({text: content, analysed_text_arr: arr, line_length_arr: line_length_arr, newline_counter: content.split('\n').length});
               answer
               .save(answer)
               .then(() => {
-                res.json(answer.analysed_text_arr);
+                res.json(answer);
                 res.end();
               })
             })

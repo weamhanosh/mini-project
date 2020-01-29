@@ -1,18 +1,14 @@
 import React from 'react';
-// import {connect} from 'react-redux';
-// import ArchiveActions from '../Archive/actions';
-// import {Button} from 'primereact/button';
 import MyEditorActions from "./actions";
+import {connect} from 'react-redux';
+
 import './MyEditor.scss';
-import {Editor} from "primereact/editor";
-import {Button} from "primereact/button";
-// import {ScrollPanel} from "primereact/scrollpanel";
-import {OverlayPanel} from "primereact/overlaypanel";
+
+// import {Editor} from "primereact/editor";
 import {ProgressBar} from 'primereact/progressbar';
 
-import { Popover } from 'antd';
-
-import {connect} from 'react-redux';
+import { Popover, Button, Input } from 'antd';
+const { TextArea } = Input;
 
 class MyEditor extends React.Component {
     
@@ -26,136 +22,89 @@ class MyEditor extends React.Component {
 
     one_word_renderer(word, analysis){
         return(
-            <Popover
-                title={word}
-                content={
-                    <div>
-                    <p>{analysis}</p>
-                    </div>
-                }
-                trigger="click"
-                >
-                <h5 style={{color: "#2e81ff"}}>{word}</h5>
-            </Popover>
+        <Popover
+            title={word}
+            content={
+                <div>
+                <p>{analysis}</p>
+                </div>
+            }
+            // trigger="click"
+            // trigger="hover"
+            >
+            <h6 style={{color: "#2e81ff"}}>{word}</h6>
+        </Popover>
         );
     }
 
     words_renderer() {
         let words_analysis_array = [];
-        for (let i = 0; i < this.props.answer.length; i++){
+        let length = this.props.answer.length;
+        let counter_index = Array(this.props.answer[(this.props.answer.length - 1)].line_index + 1);
+        let m = 0;
+        let n = 0;
+        for (let i  = 0; i < counter_index.length; i++){
+            for (let j = n; j < length; j++){
+                if (this.props.answer[j].line_index > i || j === length - 1){
+                    counter_index[i] = Array(j - n).fill(0);
+                    n = j;
+                    break;
+                }
+            }
+            for (let j = m; j < length; j++){
+                if (this.props.answer[j].line_index > i){
+                    m = j;
+                    break;
+                }
+                counter_index[i][this.props.answer[j].index]++;
+            }
+        }
+        
+
+
+        for (let i = 0; i < length; i++){
             let word = this.props.answer[i].word_in_text;
             let analysis = this.props.answer[i].analysis.toString();
             words_analysis_array[i] = this.one_word_renderer(word, analysis);
         }
-        let div_to_return = <div className="wrapper_for_words"></div>
-        for (let i = 0; i < this.props.answer.length; i += 10){
-
+        let divs = [];
+        let k = 0;
+        console.log(counter_index)
+        for (let i = 0; i < counter_index.length; i++){
+            let a = counter_index[i].length;
+            divs[i] = 
+            <div className="lines">
+                {words_analysis_array.slice(k, k + a)}
+            </div>
+            k +=  counter_index[i].length;
         }
-        return words_analysis_array;
+        return divs;
     }
-        // if (n % 9 === 0 && n !== 0){
-        //     return this.words_renderer(n + 1,
-        //             <div className="1_words">
-        //                 <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>{this.props.answer[this.props.answer.length - 1 - n].word_in_text}</h5>
-        //                 <OverlayPanel ref={(el) => this.op = el}>
-        //                     {this.props.answer[this.props.answer.length - 1 - n].analysis.toString()}
-        //                 </OverlayPanel>
-        //                 {so_far}
-        //                 <div></div>
-        //             </div>
-        //     );
-        // }
-        // if (n ===  this.props.answer.length)
-        //     return so_far;
-        // return this.words_renderer(n + 1,
-        //                     <div className="1_words">
-        //                         <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>{this.props.answer[this.props.answer.length - 1 - n].word_in_text}</h5>
-        //                         <OverlayPanel ref={(el) => this.op = el}>
-        //                             {this.props.answer[this.props.answer.length - 1 - n].analysis.toString()}
-        //                         </OverlayPanel>
-        //                         {so_far}
-        //                     </div>);
-    // }
-
+     
     render(){
-        const header = this.renderHeader();
+        // const header = this.renderHeader();
         return(
-            <div className="content-section implementation">
-                <Editor headerTemplate={header} style={{height:'320px', width:'650px'}} value={this.props.text}
-                    onTextChange={(e) => this.props.EditTextEventHandler(e)}/>
-                <p></p>
-                {/* <div className="buttons"> */}
-                    <Button label="Analyze" /*icon="pi pi-spin pi-spinner"*/
-                        onClick={() => {this.props.UploadAndAnalyseTextEventHandler(this.props.text)}}/>
-                    
-                {/* </div> */}
+            <div className="content-section implementation" style={{direction: 'rtl'}}>
+                {/* <Editor headerTemplate={header} style={{height:'320px', width:'650px'}} value={this.props.text}
+                    onTextChange={(e) => this.props.EditTextEventHandler(e)}/> */}
+                <div className="text_area">
+                    <TextArea
+                        value={this.props.text}
+                        onChange={this.props.EditTextEventHandler}
+                        placeholder="טקסט לניתוח"
+                        autoSize
+                        // size="default"
+                    />
+                </div>
                 <p></p>
                 {this.props.render_progress_bar && (!this.props.done) && <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>}
-                
-                {this.props.done &&
-                    <div className="wrapper_for_words">
-                        {this.words_renderer()[0]}
-                        {this.words_renderer()[1]}
-                        {this.words_renderer()[2]}
-                        {this.words_renderer()[3]}
-                        {this.words_renderer()[4]}
-                        {this.words_renderer()[5]}
-                        {this.words_renderer()[6]}
-                        {this.words_renderer()[7]}
-                        {this.words_renderer()[8]}
-                        {this.words_renderer()[9]}
-                        {/* <div className="ten_words">
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>א</h5>
-                            <OverlayPanel name={op+"1"} ref={(el) => this.op = el} showCloseIcon={true}>
-                                א
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>ב</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                ב
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>ג</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                ג
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>ד</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                ד
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>ה</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                ה
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>ו</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                ו
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>ז</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                ז
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>ח</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                ח
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>ט</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                ט
-                            </OverlayPanel>
-                            <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op.toggle(e)}>י</h5>
-                            <OverlayPanel ref={(el) => this.op = el} showCloseIcon={true}>
-                                י
-                            </OverlayPanel>
-                        </div> */}
-                        {/* <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op0.toggle(e)}>{this.props.answer[this.props.answer.length - 1 - 0].word_in_text}</h5>
-                        <OverlayPanel ref={(e) => this.op0 = e}>
-                            {this.props.answer[this.props.answer.length - 1 - 0].analysis.toString()}
-                        </OverlayPanel>
-                        <h5 style={{color: "#2e81ff"}} onClick={(e) => this.op1.toggle(e)}>{this.props.answer[this.props.answer.length - 1 - 1].word_in_text}</h5>
-                        <OverlayPanel ref={(e) => this.op1 = e}>
-                            {this.props.answer[this.props.answer.length - 1 - 1].analysis.toString()}
-                        </OverlayPanel> */}
-                    </div>
-                }
+                <p></p>
+                <Button type="primary" icon="experiment"
+                    onClick={() => {this.props.UploadAndAnalyseTextEventHandler(this.props.text)}}>
+                        נתח
+                </Button>
+                <p></p>
+                {this.props.done && this.words_renderer()}
                 
             </div>
         );
@@ -168,14 +117,19 @@ const mapStateToProps = (state) => {
         text: state['myEditor'].get('text'),
         done: state['myEditor'].get('done'),
         answer: state['myEditor'].get('answer'),
-        output: state['myEditor'].get('output')
+        newline_counter: state['myEditor'].get('newline_counter'),
+        line_length_arr: state['myEditor'].get('line_length_arr')
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        // EditTextEventHandler: (e) => {
+        //     dispatch(MyEditorActions.editTextField(e.textValue.substring(0, e.textValue.length - 1)));
+        // },
         EditTextEventHandler: (e) => {
-            dispatch(MyEditorActions.editTextField(e.textValue.substring(0, e.textValue.length - 1)));
+            e.persist();
+            dispatch(MyEditorActions.editTextField(e.target.value));
         },
         UploadAndAnalyseTextEventHandler: (text) => {
             dispatch(MyEditorActions.uploadAction(text));

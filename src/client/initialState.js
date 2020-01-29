@@ -13,7 +13,8 @@ export default {
             text: "",
             analysed_text_arr: []
         },
-        output: "",
+        line_length_arr: [],
+        newline_counter: 0
     })
     // app: Map({
     //   size: 200,

@@ -14,6 +14,7 @@ function* upload(action){
         body: JSON.stringify({"text": action.payload})
       });
     const json = yield call([res, 'json']); //retrieve body of response
+    console.log('ServerReturned=', json);
     yield put(MyEditorActions.doneAction(json));
   } catch (e) {
     console.log("received error:");

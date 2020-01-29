@@ -8,8 +8,11 @@ let answerSchema = new Schema({
     word_in_text: String,
     root: String,
     word_without_starts: String,
+    line_index: Number,
     analysis: [String]
-  }]
+  }],
+  line_length_arr: [{line_index: Number, line_length: Number}],
+  newline_counter: Number
 });
 
 module.exports = mongoose.model('AnswerModel', answerSchema);

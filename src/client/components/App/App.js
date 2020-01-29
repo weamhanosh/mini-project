@@ -8,32 +8,41 @@ import './App.css';
 import {ScrollPanel} from "primereact/scrollpanel";
 import MyCheckbox from "../Checkbox";
 import MyEditor from "../MyEditor";
-// import {Button} from "primereact/button";
-import { Popover, Button } from 'antd';
-
+import {Button} from "primereact/button";
 
 class App extends React.Component {   
 
     render() {
-        const content = (
-        <div>
-          <p>Content</p>
-          <p>Content</p>
-        </div>
-      );
         return (
-          
-            <div>
-              <Popover content={content} title="Title" trigger="hover">
-                <Button>Hover me</Button>
-              </Popover>
-              <Popover content={content} title="Title" trigger="focus">
-                <Button>Focus me</Button>
-              </Popover>
-              <Popover content={content} title="Title" trigger="click">
-                <Button>Click me</Button>
-              </Popover>
-            </div>)
+            <div className="App">
+                <div className="App-header">
+                    <a className="App-link" href="https://www.lit-lab.bgu.ac.il/" target="_blank"
+                       rel="noopener noreferrer">
+                        <h1 style={{color: "#2e81ff"}}>יותר מדי מילים</h1>
+                        <img src={logo} className="App-logo" alt="logo"/>
+                    </a>
+                </div>
+                <p></p>
+                <MyEditor/>
+                {/* <MyCheckbox/> */}
+                {/* <div className="output">
+                    <ScrollPanel style={{width: '100%', height: '300px'}} className="custombar">
+                        <div style={{padding: '1em', lineHeight: '1.5', width: '600px', color: "#2e81ff"}}>
+                            The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
+                            son Michael has just come home from the war, but does not intend to become part of his father's business. Through
+                            Michael's life the nature of the family business becomes clear. The business of the family is just like the head
+                            of the family, kind and benevolent to those who give respect, but given to ruthless violence whenever anything stands
+                            against the good of the family.
+                            The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding. His beloved
+                            son Michael has just come home from the war, but does not intend to become part of his father's business. Through Michael's
+                            life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind
+                            and benevolent to those who give respect, but given to ruthless violence whenever anything stands against the good of the
+                            family.
+                        </div>
+                    </ScrollPanel>
+                </div> */}
+            </div>
+        );
     }
 }
 

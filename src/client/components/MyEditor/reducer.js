@@ -40,20 +40,9 @@ const MyEditorReducer = (state = initialState.myEditor, action) => {
             // Add overlay on words
             state = state.set('render_progress_bar', false);
             state = state.set('done', true);
-            state = state.set('answer', action.payload);
-            let answer = action.payload;
-            let output = [];
-            for (let i = 0; i < answer.length; i++){
-                let word_in_text = answer[i].word_in_text;
-                let analysis = answer[i].analysis;
-                let tmp = analysis.reduce((acc, curr)=> {if(curr === 'unspecified') return acc; return acc + ` ` + curr;}, "");
-output[i] =
-`Word in text: ${word_in_text}
-    Analysis: ${tmp}
-`;
-            }
-            let output_string = output.reduce((acc, curr)=> acc + "\n" + curr, "");
-            state = state.set('output', output_string);
+            state = state.set('answer', action.payload.analysed_text_arr);
+            state = state.set('newline_counter', action.payload.newline_counter);
+            state = state.set('line_length_arr', action.payload.line_length_arr);
             console.log('NEW STATE=', state);
             return state;
         }
