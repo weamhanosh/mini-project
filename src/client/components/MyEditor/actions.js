@@ -22,10 +22,19 @@ function doneAction(output){
   }
 }
 
+function changeOptions(option){
+  return {
+    type: MyEditorActionsConstants.CHANGE_OPTIONS_ACTION,
+    payload: option
+  }
+}
+
+
 let MyEditorActions = {
   editTextField,
   uploadAction,
   doneAction,
+  changeOptions
 };
 
 export default MyEditorActions;

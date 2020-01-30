@@ -47,6 +47,14 @@ const MyEditorReducer = (state = initialState.myEditor, action) => {
             return state;
         }
 
+        case MyEditorActionsConstants.CHANGE_OPTIONS_ACTION:{
+            console.log('RECEIVED: MyEditorActionsConstants.CHANGE_OPTIONS_ACTION');
+            console.log('ACTION:', action);
+            state = state.set('selected_options', action.payload);
+            console.log('NEW STATE=', state);
+            return state;
+        }
+
         default: //otherwise state is lost!
             return state;
     }

@@ -18,12 +18,25 @@ const runTagger = promisify(child_process.execFile);
 //   })
 // }
 
-async function all(content){
-  await writeFile('C:\\Users\\weamh\\Desktop\\tmpText.txt', content);
+function make_id() {
+  let length = Math.floor(Math.random() * 10);
+  length += 10;
+  
+  let result           = '';
+  let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let charactersLength = characters.length;
+  for ( let i = 0; i < length; i++ ) {
+     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
+async function all(content, curr_id){
+  await writeFile('C:\\Users\\weamh\\Desktop\\' + curr_id + '.txt', content);
     // runTagger
-  await runTagger('C:\\Users\\weamh\\Desktop\\mainBat.bat', ['C:\\Users\\weamh\\Desktop\\tmpText.txt'], { cwd: 'C:\\Users\\weamh\\Desktop' });
+  await runTagger('C:\\Users\\weamh\\Desktop\\mainBat.bat', ['C:\\Users\\weamh\\Desktop\\' + curr_id + '.txt'], { cwd: 'C:\\Users\\weamh\\Desktop' });
   // console.log(output.stdout);
-  const data = await readFile('C:\\Users\\weamh\\Desktop\\taggedDelimitedtmpText.txt', 'utf-8');
+  const data = await readFile('C:\\Users\\weamh\\Desktop\\taggeddelimited' + curr_id + '.txt', 'utf-8');
   return data;
 }
 
@@ -40,9 +53,13 @@ module.exports = (app) => {
             res.json(doc);
           } else {
             console.log('creating new entry in db!');
-            let data_promise = all(content);
+            let curr_id = make_id();
+            let data_promise = all(content, curr_id);
             data_promise
             .then((data) =>{
+              fs.unlink('C:\\Users\\weamh\\Desktop\\' + curr_id + '.txt', (err) => { if (err) console.error(err)})
+              fs.unlink('C:\\Users\\weamh\\Desktop\\delimited' + curr_id + '.txt', (err) => { if (err) console.error(err)})
+              fs.unlink('C:\\Users\\weamh\\Desktop\\taggeddelimited' + curr_id + '.txt', (err) => {if (err) console.error(err)})
               let data_array = data.split('\n');
               let arr = [];
               let m = -1;

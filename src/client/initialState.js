@@ -14,7 +14,13 @@ export default {
             analysed_text_arr: []
         },
         line_length_arr: [],
-        newline_counter: 0
+        newline_counter: 0,
+        options: [
+            {label: 'adjective', value: 'adjective'},
+            {label: 'verb', value: 'verb'},
+            {label: 'תארים', value: 'תארים'}
+        ],
+        selected_options: []
     })
     // app: Map({
     //   size: 200,
