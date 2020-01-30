@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 
 import './MyEditor.scss';
 
-// import {Editor} from "primereact/editor";
 import {ProgressBar} from 'primereact/progressbar';
 
 import { Popover, Button, Input } from 'antd';
@@ -12,15 +11,7 @@ const { TextArea } = Input;
 
 class MyEditor extends React.Component {
     
-    renderHeader() {
-        return (
-            <span className="ql-formats">
-                <button icon="pi pi-align-right" className="ql-align" aria-label="Alignment" value="right"></button>
-            </span>
-        );
-    }
-
-    one_word_renderer(word, analysis){
+    one_word_renderer(word, word_without_starts, analysis){
         return(
         <Popover
             title={word}
@@ -32,7 +23,7 @@ class MyEditor extends React.Component {
             // trigger="click"
             // trigger="hover"
             >
-            <h6 style={{color: "#2e81ff"}}>{word}</h6>
+            <h6 style={{color: "#2e81ff"}}>{word_without_starts}</h6>
         </Popover>
         );
     }
@@ -60,40 +51,36 @@ class MyEditor extends React.Component {
             }
         }
         
-
-
         for (let i = 0; i < length; i++){
             let word = this.props.answer[i].word_in_text;
+            let word_without_starts = this.props.answer[i].word_without_starts;
             let analysis = this.props.answer[i].analysis.toString();
-            words_analysis_array[i] = this.one_word_renderer(word, analysis);
+            words_analysis_array[i] = this.one_word_renderer(word, word_without_starts, analysis);
         }
+
         let divs = [];
         let k = 0;
         console.log(counter_index)
         for (let i = 0; i < counter_index.length; i++){
-            let a = counter_index[i].length;
+            let a = (counter_index[i]).reduce((acc, curr) => acc + curr, 0);
             divs[i] = 
             <div className="lines">
                 {words_analysis_array.slice(k, k + a)}
             </div>
-            k +=  counter_index[i].length;
+            k += a;
         }
         return divs;
     }
      
     render(){
-        // const header = this.renderHeader();
         return(
             <div className="content-section implementation" style={{direction: 'rtl'}}>
-                {/* <Editor headerTemplate={header} style={{height:'320px', width:'650px'}} value={this.props.text}
-                    onTextChange={(e) => this.props.EditTextEventHandler(e)}/> */}
                 <div className="text_area">
                     <TextArea
                         value={this.props.text}
                         onChange={this.props.EditTextEventHandler}
                         placeholder="טקסט לניתוח"
                         autoSize
-                        // size="default"
                     />
                 </div>
                 <p></p>
@@ -105,7 +92,6 @@ class MyEditor extends React.Component {
                 </Button>
                 <p></p>
                 {this.props.done && this.words_renderer()}
-                
             </div>
         );
     }
@@ -124,9 +110,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // EditTextEventHandler: (e) => {
-        //     dispatch(MyEditorActions.editTextField(e.textValue.substring(0, e.textValue.length - 1)));
-        // },
         EditTextEventHandler: (e) => {
             e.persist();
             dispatch(MyEditorActions.editTextField(e.target.value));
