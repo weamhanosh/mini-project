@@ -12,19 +12,20 @@ const { TextArea } = Input;
 
 class MyEditor extends React.Component {
     
-    one_word_renderer(word, word_without_starts, analysis){
+    one_word_renderer(word, word_without_starts, analysis, word_root){
         return(
         <Popover
-            title={word}
+            title={<p style={{color: "#2e81ff", direction: 'rtl'}}>{word}</p>}
             content={
                 <div>
-                <p>{analysis}</p>
+                <p style={{color: "#2e81ff", direction: 'rtl'}}>לקסמה: {word_root}</p>
+                <p style={{color: "#2e81ff", direction: 'rtl'}}>ניתוח: {analysis}</p>
                 </div>
             }
             // trigger="click"
             // trigger="hover"
             >
-            <h6 style={{color: "#2e81ff"}}>{word_without_starts}</h6>
+            <p style={{color: "#2e81ff", direction: 'rtl'}}>{word_without_starts}</p>
         </Popover>
         );
     }
@@ -100,13 +101,14 @@ class MyEditor extends React.Component {
         for (let i = 0; i < length; i++){
             let word = this.props.answer[i].word_in_text;
             let word_without_starts = this.props.answer[i].word_without_starts;
+            let word_root = this.props.answer[i].root;
             let analysis = this.props.answer[i].analysis.toString();
             if (this.props.selected_options.length === 0){
-                words_analysis_array[i] = this.one_word_renderer(word, word_without_starts, analysis);
+                words_analysis_array[i] = this.one_word_renderer(word, word_without_starts, analysis, word_root);
             } else {
                 for (let j = 0; j < this.props.selected_options.length; j++){
                     if (analysis.includes(this.props.selected_options[j])){
-                        words_analysis_array[i] = this.one_word_renderer(word, word_without_starts, analysis);
+                        words_analysis_array[i] = this.one_word_renderer(word, word_without_starts, analysis, word_root);
                         break;
                     }
                 }
@@ -118,7 +120,7 @@ class MyEditor extends React.Component {
         let x = 0;
         for (let i = 0; i < counter_index.length; i++){
             let a = (counter_index[i]).reduce((acc, curr) => acc + curr, 0);
-            let wanted_line_length = 15;
+            let wanted_line_length = 20;
             if (a > wanted_line_length){
                 let returned_arr = this.long_line(words_analysis_array.slice(k, k + a), wanted_line_length);
                 for (let j = 0; j < returned_arr.length; j++){
