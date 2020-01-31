@@ -5,16 +5,7 @@ import initialState from '../../initialState'
 const MyEditorReducer = (state = initialState.myEditor, action) => {
     console.log('MyEditorReducerState=', state);
     switch (action.type) {
-        // case MyEditorActionsConstants.CLEAR_ACTION:{
-        //     console.log('RECEIVED: MyEditorActionsConstants.CLEAR_ACTION');
-        //     console.log('ACTION:', action);
-        //     state = state.set('text', ""); 
-        //     state = state.set('render_progress_bar', false); 
-        //     state = state.set('upload', false); 
-        //     state = state.set('done', false); 
-        //     console.log('NEW STATE=', state);
-        //     return state;
-        // }
+
         case MyEditorActionsConstants.EDIT_TEXT_ACTION:{
             console.log('RECEIVED: MyEditorActionsConstants.EDIT_TEXT_ACTION');
             console.log('ACTION:', action);
@@ -35,9 +26,6 @@ const MyEditorReducer = (state = initialState.myEditor, action) => {
         case MyEditorActionsConstants.DONE_ACTION:{
             console.log('RECEIVED: MyEditorActionsConstants.DONE_ACTION');
             console.log('ACTION:', action);
-            // PRINT OUTPUT
-            console.log(action.payload);
-            // Add overlay on words
             state = state.set('render_progress_bar', false);
             state = state.set('done', true);
             state = state.set('answer', action.payload.analysed_text_arr);
