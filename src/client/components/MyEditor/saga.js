@@ -17,9 +17,9 @@ function* upload(action){
     console.log('ServerReturned=', json);
     yield put(MyEditorActions.doneAction(json));
   } catch (e) {
-    console.log("received error:");
-    console.log(e);
-    // yield put(FileActions.loadImagesFailureAction(e.message));
+    // console.log("received error:");
+    // console.log(e);
+    yield put(MyEditorActions.failureAction());
   }
 }
 

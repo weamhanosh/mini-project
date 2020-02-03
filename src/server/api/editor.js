@@ -32,11 +32,11 @@ function make_id() {
 }
 
 async function all(content, curr_id){
-  await writeFile('C:\\Users\\weamh\\Desktop\\' + curr_id + '.txt', content);
+  await writeFile('C:\\project\\' + curr_id + '.txt', content);
     // runTagger
-  await runTagger('C:\\Users\\weamh\\Desktop\\mainBat.bat', ['C:\\Users\\weamh\\Desktop\\' + curr_id + '.txt'], { cwd: 'C:\\Users\\weamh\\Desktop' });
+  await runTagger('C:\\project\\mainBat.bat', ['C:\\project\\' + curr_id + '.txt'], { cwd: 'C:\\project' });
   // console.log(output.stdout);
-  const data = await readFile('C:\\Users\\weamh\\Desktop\\taggeddelimited' + curr_id + '.txt', 'utf-8');
+  const data = await readFile('C:\\project\\taggeddelimited' + curr_id + '.txt', 'utf-8');
   return data;
 }
 
@@ -57,9 +57,9 @@ module.exports = (app) => {
             let data_promise = all(content, curr_id);
             data_promise
             .then((data) =>{
-              fs.unlink('C:\\Users\\weamh\\Desktop\\' + curr_id + '.txt', (err) => { if (err) console.error(err)})
-              fs.unlink('C:\\Users\\weamh\\Desktop\\delimited' + curr_id + '.txt', (err) => { if (err) console.error(err)})
-              fs.unlink('C:\\Users\\weamh\\Desktop\\taggeddelimited' + curr_id + '.txt', (err) => {if (err) console.error(err)})
+              fs.unlink('C:\\project\\' + curr_id + '.txt', (err) => { if (err) console.error(err)})
+              fs.unlink('C:\\project\\delimited' + curr_id + '.txt', (err) => { if (err) console.error(err)})
+              fs.unlink('C:\\project\\taggeddelimited' + curr_id + '.txt', (err) => {if (err) console.error(err)})
               let data_array = data.split('\n');
               let arr = [];
               let m = -1;

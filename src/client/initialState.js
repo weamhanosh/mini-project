@@ -20,7 +20,8 @@ export default {
             {label: 'verb', value: 'verb'},
             {label: 'תארים', value: 'תארים'}
         ],
-        selected_options: []
+        selected_options: [],
+        failed: false
     })
     // app: Map({
     //   size: 200,

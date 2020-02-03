@@ -7,7 +7,7 @@ import './MyEditor.scss';
 import {ProgressBar} from 'primereact/progressbar';
 import {MultiSelect} from 'primereact/multiselect';
 
-import { Popover, Button, Input } from 'antd';
+import { Popover, Button, Input, Result } from 'antd';
 const { TextArea } = Input;
 
 class MyEditor extends React.Component {
@@ -84,6 +84,7 @@ class MyEditor extends React.Component {
                 }
             }
         }
+
         for (let i  = 0; i < counter_index.length; i++){
             for (let j = m + 1; j < length; j++){
                 if (j === length - 1){
@@ -169,12 +170,22 @@ class MyEditor extends React.Component {
                 </div>
                 <p></p>
                 <Button type="primary" icon="experiment"
-                    disabled={this.props.render_progress_bar && (!this.props.done)}
+                    disabled={(this.props.render_progress_bar && (!this.props.done)) || (this.props.failed)}
                     onClick={() => {this.props.UploadAndAnalyseTextEventHandler(this.props.text)}}  style={{direction: 'ltr'}}>
                         נתח
                 </Button>
                 <p></p>
                 {this.props.done && this.words_renderer()}
+                {this.props.failed &&
+                    <Result
+                        status="error"
+                        title="פעולה נכשלה"
+                        extra={[
+                            <Button type="primary" onClick={() => window.location.reload(false)}>
+                                רענן דף
+                            </Button>
+                        ]}
+                    />}
             </div>
         );
     }
@@ -189,7 +200,8 @@ const mapStateToProps = (state) => {
         newline_counter: state['myEditor'].get('newline_counter'),
         line_length_arr: state['myEditor'].get('line_length_arr'),
         options: state['myEditor'].get('options'),
-        selected_options: state['myEditor'].get('selected_options')
+        selected_options: state['myEditor'].get('selected_options'),
+        failed: state['myEditor'].get('failed')
     }
 };
 

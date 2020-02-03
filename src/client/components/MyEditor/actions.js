@@ -29,12 +29,19 @@ function changeOptions(option){
   }
 }
 
+function failureAction(){
+  return {
+    type: MyEditorActionsConstants.FAILURE_ACTION
+  }
+}
+
 
 let MyEditorActions = {
   editTextField,
   uploadAction,
   doneAction,
-  changeOptions
+  changeOptions,
+  failureAction
 };
 
 export default MyEditorActions;
