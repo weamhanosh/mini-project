@@ -15,4 +15,4 @@ let answerSchema = new Schema({
   newline_counter: Number
 });
 
-module.exports = mongoose.model('AnswerModel', answerSchema);
+module.exports = mongoose.model('texts', answerSchema);

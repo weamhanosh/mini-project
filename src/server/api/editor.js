@@ -1,4 +1,3 @@
-// let axios = require('axios');
 let AnswerModel = require('../model/editor');
 let fs = require('fs');
 const child_process = require('child_process');
@@ -7,16 +6,6 @@ const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
 const runTagger = promisify(child_process.execFile);
 
-// async function getImages(tag) {
-//   const getImagesUrl = `services/rest/?method=flickr.photos.search&api_key=522c1f9009ca3609bcbaf08545f067ad
-//   &tags=${tag}&tag_mode=any&per_page=100&format=json&safe_search=1&nojsoncallback=1`;
-//   const baseUrl = 'https://api.flickr.com/';
-//   return await axios({
-//     url: getImagesUrl,
-//     baseURL: baseUrl,
-//     method: 'GET'
-//   })
-// }
 
 function make_id() {
   let length = Math.floor(Math.random() * 10);
@@ -33,9 +22,7 @@ function make_id() {
 
 async function all(content, curr_id){
   await writeFile('C:\\project\\' + curr_id + '.txt', content);
-    // runTagger
   await runTagger('C:\\project\\mainBat.bat', ['C:\\project\\' + curr_id + '.txt'], { cwd: 'C:\\project' });
-  // console.log(output.stdout);
   const data = await readFile('C:\\project\\taggeddelimited' + curr_id + '.txt', 'utf-8');
   return data;
 }
@@ -110,6 +97,7 @@ module.exports = (app) => {
             })
             .catch((e) => {
               console.log(e);
+              // add attempt to restart server
             });
           }
         });

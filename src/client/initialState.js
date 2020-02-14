@@ -1,10 +1,6 @@
 const { /*List,*/ Map } = require('immutable');
 
 export default {
-    // file: Map({
-    //     upload: false,
-    //     done: false,
-    // }),
     myEditor: Map({
         render_progress_bar: false,
         text: "",
@@ -21,7 +17,8 @@ export default {
             {label: 'תארים', value: 'תארים'}
         ],
         selected_options: [],
-        failed: false
+        failed: false,
+        render_text_box: true
     })
     // app: Map({
     //   size: 200,

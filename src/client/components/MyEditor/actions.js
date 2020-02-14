@@ -35,13 +35,21 @@ function failureAction(){
   }
 }
 
+function changeInput(option){
+  return {
+    type: MyEditorActionsConstants.CHANGE_INPUT_ACTION,
+    payload: option
+  }
+}
+
 
 let MyEditorActions = {
   editTextField,
   uploadAction,
   doneAction,
   changeOptions,
-  failureAction
+  failureAction,
+  changeInput
 };
 
 export default MyEditorActions;

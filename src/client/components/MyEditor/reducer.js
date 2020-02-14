@@ -55,6 +55,14 @@ const MyEditorReducer = (state = initialState.myEditor, action) => {
             return state;
         }
 
+        case MyEditorActionsConstants.CHANGE_INPUT_ACTION:{
+            console.log('RECEIVED: MyEditorActionsConstants.CHANGE_INPUT_ACTION');
+            console.log('ACTION:', action);
+            state = state.set('render_text_box', action.payload);
+            console.log('NEW STATE=', state);
+            return state;
+        }
+
         default: //otherwise state is lost!
             return state;
     }
