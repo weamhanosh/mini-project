@@ -1,11 +1,19 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import logo from '../../../../public/TestTube.ico';
 import './App.css';
 import MyEditor from "../MyEditor";
+import MyCheckBox from "../MyCheckBox";
+import MyAnalyzeButton from "../MyAnalyzeButton";
+import MyPopover from "../MyPopover";
+import MyFilter from "../MyFilter";
+import MyFileUpload from '../MyFileUpload';
+import { Button, Result } from 'antd';
 
 class App extends React.Component {
 
     render() {
+                
         return (
             <div className="App">
                 <div className="App-header">
@@ -14,10 +22,43 @@ class App extends React.Component {
                         <img src={logo} className="App-logo" alt="logo"/>
                     </a>
                 </div>
-                <MyEditor/>
+                <MyCheckBox/>
+                {this.props.render_text_box &&
+                    <MyEditor/>
+                }
+                {(!this.props.render_text_box) &&
+                    <MyFileUpload/>
+                }
+                <MyFilter/>
+                <MyAnalyzeButton/>
+                <MyPopover/>
+                {this.props.failed &&
+                    <Result
+                        status="error"
+                        title="פעולה נכשלה"
+                        extra={[
+                            <Button type="primary" onClick={() => window.location.reload(false)}>
+                                רענן דף
+                            </Button>
+                        ]}
+                    />
+                }
             </div>
         );
     }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        failed: state['myAnalyzeButton'].get('failed'),
+        render_text_box: state['myCheckBox'].get('render_text_box')
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+

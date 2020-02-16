@@ -1,13 +1,15 @@
 import { combineReducers } from 'redux';
-// import AppReducer from './components/App/reducer';
-// import ArchiveReducer from './components/Archive/reducer';
-// import FileReducer from './components/File/reducer';
 import MyEditorReducer from './components/MyEditor/reducer';
+import MyCheckBoxReducer from './components/MyCheckBox/reducer';
+import MyAnalyzeButtonReducer from './components/MyAnalyzeButton/reducer';
+import MyPopoverReducer from './components/MyPopover/reducer';
+import MyFilterReducer from './components/MyFilter/reducer';
 
 
 export default combineReducers({
-  // app: AppReducer,
-  // archive: ArchiveReducer,
-  // file: FileReducer,
-  myEditor: MyEditorReducer
+  myEditor: MyEditorReducer,
+  myCheckBox: MyCheckBoxReducer,
+  myAnalyzeButton: MyAnalyzeButtonReducer,
+  myPopover: MyPopoverReducer,
+  myFilter: MyFilterReducer
 });
