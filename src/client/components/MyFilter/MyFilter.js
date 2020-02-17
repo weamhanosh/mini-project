@@ -11,6 +11,7 @@ class MyFilter extends React.Component {
     render(){
         return(
             <div className="lines" style={{direction: 'ltr'}}>
+                <p></p>
                 <MultiSelect
                     value={this.props.selected_options}
                     options={this.props.options}
@@ -19,6 +20,7 @@ class MyFilter extends React.Component {
                     filter={true}
                     placeholder={"אפשרויות חיפוש"}>
                 </MultiSelect>
+                <p></p>
             </div>
         );
     }

@@ -25,6 +25,7 @@ class MyDownloadFile extends React.Component {
             <div className="content-section implementation" style={{direction: 'rtl'}}>
                 <div id="container" style={{direction: 'ltr'}}>
                     <Button type="primary" icon="download" onClick={(_e) => {download("analysis.txt", this.props.analysis_as_is)}}>הורדת ניתוח</Button>
+                    <p></p>
 			    </div>
                 <p></p>
             </div>

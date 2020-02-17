@@ -12,6 +12,7 @@ class MyEditor extends React.Component {
     render(){
         return(
             <div className="content-section implementation" style={{direction: 'rtl'}}>
+                <p></p>
                 <div className="text_area">
                     <TextArea
                         value={this.props.text}

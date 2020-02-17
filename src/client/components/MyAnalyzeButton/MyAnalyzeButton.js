@@ -15,6 +15,7 @@ class MyAnalyzeButton extends React.Component {
         return(
             <div className="text_area">
                 <div className="content-section implementation" style={{direction: 'rtl'}}>
+                    <p></p>
                     <Button type="primary" icon="experiment"
                         disabled={(this.props.render_progress_bar && (!this.props.done)) || (this.props.failed)}
                         onClick={() => {this.props.UploadAndAnalyseTextEventHandler(this.props.text)}} style={{direction: 'ltr'}}>

@@ -3,11 +3,9 @@ import {connect} from 'react-redux';
 import logo from '../../../../public/TestTube.ico';
 import './App.css';
 import MyEditor from "../MyEditor";
-import MyCheckBox from "../MyCheckBox";
 import MyAnalyzeButton from "../MyAnalyzeButton";
 import MyPopover from "../MyPopover";
 import MyFilter from "../MyFilter";
-import MyFileUpload from '../MyFileUpload';
 import MyDownloadFile from '../MyDownloadFile';
 import { Button, Result } from 'antd';
 
@@ -23,13 +21,7 @@ class App extends React.Component {
                         <img src={logo} className="App-logo" alt="logo"/>
                     </a>
                 </div>
-                <MyCheckBox/>
-                {this.props.render_text_box &&
-                    <MyEditor/>
-                }
-                {(!this.props.render_text_box) &&
-                    <MyFileUpload/>
-                }
+                <MyEditor/>
                 <MyFilter/>
                 <MyAnalyzeButton/>
                 {this.props.done &&
@@ -56,7 +48,6 @@ const mapStateToProps = (state) => {
     return {
         failed: state['myAnalyzeButton'].get('failed'),
         done: state['myAnalyzeButton'].get('done'),
-        render_text_box: state['myCheckBox'].get('render_text_box')
     }
 };
 

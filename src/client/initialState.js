@@ -5,9 +5,6 @@ export default {
     myEditor: Map({
         text: "",
     }),
-    myCheckBox: Map({
-        render_text_box: true
-    }),
     myAnalyzeButton: Map({
         render_progress_bar: false,
         done: false,
@@ -76,9 +73,6 @@ export default {
         selected_options: [],
     }),
     myPopover: Map({ }),
-    app: Map({ }),
-    myFileUpload: Map({
-        text_file: ""
-    })
+    app: Map({ })
     
 };
