@@ -23,6 +23,7 @@ class MyAnalyzeButton extends React.Component {
                 </div>
                 <p></p>
                 {this.props.render_progress_bar && (!this.props.done) && <ProgressBar mode="indeterminate" style={{height: '6px'}}></ProgressBar>}
+                <p></p>
             </div>
         );
     }

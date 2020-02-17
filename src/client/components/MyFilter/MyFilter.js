@@ -10,17 +10,15 @@ class MyFilter extends React.Component {
     
     render(){
         return(
-            <div className="content-section implementation" style={{direction: 'rtl'}}>
-                <div className="content-section implementation multiselect" style={{direction: 'ltr'}}>
-                    <MultiSelect
-                        value={this.props.selected_options}
-                        options={this.props.options}
-                        onChange={(e) => this.props.ChangeOptionsEventHandler(e.value, this.props.options)}
-                        style={{minWidth: '12em'}}
-                        filter={true}
-                        placeholder={"אפשרויות חיפוש"}>
-                    </MultiSelect>
-                </div>
+            <div className="lines" style={{direction: 'ltr'}}>
+                <MultiSelect
+                    value={this.props.selected_options}
+                    options={this.props.options}
+                    onChange={(e) => this.props.ChangeOptionsEventHandler(e.value, this.props.options)}
+                    style={{minWidth: '12em'}}
+                    filter={true}
+                    placeholder={"אפשרויות חיפוש"}>
+                </MultiSelect>
             </div>
         );
     }

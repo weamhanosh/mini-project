@@ -56,7 +56,6 @@ class MyPopover extends React.Component {
         }
         return arr_to_ret;
     }
-    my_arr = [];
     words_renderer() {
         let words_analysis_array = [];
         let length = this.props.answer.length;
@@ -100,10 +99,6 @@ class MyPopover extends React.Component {
             let word_root = this.props.answer[i].root;
             let analysis = this.props.answer[i].analysis;
             if (this.props.selected_options.length === 0){
-                analysis.forEach(element => {
-                    this.my_arr.push(element)
-                });
-                this.my_arr = this.my_arr.filter((a, b) => this.my_arr.indexOf(a) === b);
                 words_analysis_array[i] = this.one_word_renderer(word, word_without_starts, analysis.toString(), word_root);
             } else {
                 for (let j = 0; j < this.props.selected_options.length; j++){
@@ -147,7 +142,6 @@ class MyPopover extends React.Component {
         return(
             <div className="content-section implementation" style={{direction: 'rtl'}}>
                 {this.props.done && this.words_renderer()}
-                {console.log(this.my_arr)}
             </div>
         );
     }

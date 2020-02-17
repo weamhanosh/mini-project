@@ -1,5 +1,5 @@
 
-const { /*List,*/ Map } = require('immutable');
+const { Map } = require('immutable');
 
 export default {
     myEditor: Map({
@@ -12,6 +12,7 @@ export default {
         render_progress_bar: false,
         done: false,
         failed: false,
+        analysis_as_is: "",
         answer: {
             text: "",
             analysed_text_arr: []
@@ -21,20 +22,17 @@ export default {
     }),
     myFilter: Map({
         options: [
-            {label: 'properName', value: 'properName'},
-            {label: 'verb', value: 'verb'},
-            {label: 'adjective', value: 'adjective'},
-            {label: 'negation', value: 'negation'},
-            {label: 'adverb', value: 'adverb'},
-            {label: 'noun', value: 'noun'},
-            {label: 'preposition', value: 'preposition'},
-            {label: 'past', value: 'past'},
-            {label: 'future', value: 'future'},
-            {label: 'infinitive', value: 'infinitive'},
             {label: 'numeral', value: 'numeral'},
+            {label: 'negation', value: 'negation'},
             {label: 'modal', value: 'modal'},
             {label: 'pronoun', value: 'pronoun'},
+            {label: 'verb', value: 'verb'},
+            {label: 'adverb', value: 'adverb'},
+            {label: 'noun', value: 'noun'},
+            {label: 'adjective', value: 'adjective'},
+            {label: 'properName', value: 'properName'},
             {label: 'temporalSubConj', value: 'temporalSubConj'},
+            {label: 'preposition', value: 'preposition'},
             {label: 'definiteArticle', value: 'definiteArticle'},
             {label: 'conjunction', value: 'conjunction'},
             {label: 'relativizer/subordinatingConjunction', value: 'relativizer/subordinatingConjunction'},
@@ -43,6 +41,10 @@ export default {
             {label: 'punctuation', value: 'punctuation'},
             {label: 'pronomial', value: 'pronomial'},
             {label: 'interrogative', value: 'interrogative'},
+            {label: 'possessive', value: 'possessive'},
+            {label: 'past', value: 'past'},
+            {label: 'future', value: 'future'},
+            {label: 'infinitive', value: 'infinitive'},
             {label: 'masculine', value: 'masculine'},
             {label: 'feminine', value: 'feminine'},
             {label: 'masculine-and-feminine', value: 'masculine-and-feminine'},
@@ -51,7 +53,6 @@ export default {
             {label: 'plural', value: 'plural'},
             {label: 'absolute', value: 'absolute'},
             {label: 'participle', value: 'participle'},
-            {label: 'possessive', value: 'possessive'},
             {label: 'copula', value: 'copula'},
             {label: 'beinoni', value: 'beinoni'},
             {label: '1', value: '1'},
@@ -74,7 +75,10 @@ export default {
         ],
         selected_options: [],
     }),
-    myPopover: Map({}),
+    myPopover: Map({ }),
     app: Map({ }),
-    myFileUpload: Map({ })
+    myFileUpload: Map({
+        text_file: ""
+    })
+    
 };

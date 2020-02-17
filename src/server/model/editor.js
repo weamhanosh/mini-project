@@ -2,6 +2,7 @@ let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
 let answerSchema = new Schema({
+  analysis_as_is: String,
   text: String,
   analysed_text_arr: [{
     index: String,

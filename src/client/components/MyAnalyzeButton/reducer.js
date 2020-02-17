@@ -1,6 +1,5 @@
 import {MyAnalyzeButtonActionsConstants} from './constants'
 import initialState from '../../initialState'
-// import { List } from 'immutable'
 
 const MyAnalyzeButtonReducer = (state = initialState.myAnalyzeButton, action) => {
     console.log('MyAnalyzeButtonReducerState=', state);
@@ -23,6 +22,7 @@ const MyAnalyzeButtonReducer = (state = initialState.myAnalyzeButton, action) =>
             state = state.set('done', true);
             state = state.set('failed', false);
             state = state.set('answer', action.payload.analysed_text_arr);
+            state = state.set('analysis_as_is', action.payload.analysis_as_is);
             state = state.set('newline_counter', action.payload.newline_counter);
             state = state.set('line_length_arr', action.payload.line_length_arr);
             console.log('NEW STATE=', state);

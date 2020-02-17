@@ -8,6 +8,7 @@ import MyAnalyzeButton from "../MyAnalyzeButton";
 import MyPopover from "../MyPopover";
 import MyFilter from "../MyFilter";
 import MyFileUpload from '../MyFileUpload';
+import MyDownloadFile from '../MyDownloadFile';
 import { Button, Result } from 'antd';
 
 class App extends React.Component {
@@ -31,6 +32,9 @@ class App extends React.Component {
                 }
                 <MyFilter/>
                 <MyAnalyzeButton/>
+                {this.props.done &&
+                    <MyDownloadFile/>
+                }
                 <MyPopover/>
                 {this.props.failed &&
                     <Result
@@ -51,6 +55,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
     return {
         failed: state['myAnalyzeButton'].get('failed'),
+        done: state['myAnalyzeButton'].get('done'),
         render_text_box: state['myCheckBox'].get('render_text_box')
     }
 };

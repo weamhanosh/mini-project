@@ -4,12 +4,13 @@ import MyCheckBoxReducer from './components/MyCheckBox/reducer';
 import MyAnalyzeButtonReducer from './components/MyAnalyzeButton/reducer';
 import MyPopoverReducer from './components/MyPopover/reducer';
 import MyFilterReducer from './components/MyFilter/reducer';
-
+import MyFileUploadReducer from './components/MyFileUpload/reducer';
 
 export default combineReducers({
   myEditor: MyEditorReducer,
   myCheckBox: MyCheckBoxReducer,
   myAnalyzeButton: MyAnalyzeButtonReducer,
   myPopover: MyPopoverReducer,
-  myFilter: MyFilterReducer
+  myFilter: MyFilterReducer,
+  myFileUpload: MyFileUploadReducer
 });
